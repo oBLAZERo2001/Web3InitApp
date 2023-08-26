@@ -9,14 +9,14 @@ import Selector from "../components/HomeComponents.jsx/Selector";
 import { useState } from "react";
 import { useEffect } from "react";
 import Recipients from "../components/HomeComponents.jsx/Recipients";
+import Token from "../components/HomeComponents.jsx/Token";
 
 export const Home = () => {
   const [selected, setSelected] = useState("neo");
+  const [neoRecipients, setNeoRecipients] = useState("");
+  const [token, setToken] = useState("");
   // neo| token
-  console.log(selected);
-  // useEffect(() => {
-  //   setSelected("1");
-  // }, []);
+  console.log("neoRecipients :", neoRecipients, "token :", token);
 
   const holding = "76.4697";
 
@@ -47,7 +47,13 @@ export const Home = () => {
           holding={holding}
         />
         {/* <MainBox /> */}
-        {selected === "neo" && <Recipients />}
+        {selected === "neo" && (
+          <Recipients
+            neoRecipients={neoRecipients}
+            setNeoRecipients={setNeoRecipients}
+          />
+        )}
+        {selected === "token" && <Token token={token} setToken={setToken} />}
       </Box>
     </Box>
   );

@@ -13,10 +13,15 @@ export default function Selector({ selected, setSelected, holding }) {
         <Box
           // component="u"
           sx={{
-            color: "grey",
+            color: selected === "neo" ? "blue" : "grey",
+            bgcolor: selected === "neo" ? "rgba(245, 245, 245, 0.7)" : "",
+            px: "2px",
+            textDecoration: "underline",
+            textUnderlineOffset: "4px",
             mx: 1,
             "&:hover": {
               color: "black",
+              cursor: "pointer",
             },
           }}
           onClick={() => {
@@ -29,10 +34,15 @@ export default function Selector({ selected, setSelected, holding }) {
         <Box
           // component="u"
           sx={{
-            color: "grey",
+            color: selected === "token" ? "blue" : "grey",
+            bgcolor: selected === "token" ? "rgba(245, 245, 245, 0.7)" : "",
+            px: "2px",
+            textDecoration: "underline",
+            textUnderlineOffset: "4px",
             mx: 1,
             "&:hover": {
               color: "black",
+              cursor: "pointer",
             },
           }}
           onClick={() => {

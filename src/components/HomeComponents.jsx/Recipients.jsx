@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-export default function Recipients() {
+export default function Recipients({ neoRecipients, setNeoRecipients }) {
   return (
     <Box sx={{}}>
       <Box sx={{ mt: 2, fontSize: "24px", fontWeight: "500" }}>
@@ -13,12 +13,13 @@ export default function Recipients() {
       </Box>
       <TextField
         sx={{ mt: 2 }}
+        size="small"
         multiline
         minRows={4}
         variant="filled"
-        //   value={name}
+        value={neoRecipients}
         onChange={(e) => {
-          console.log({ A: e.target.value });
+          setNeoRecipients(e.target.value);
         }}
         fullWidth
       />
