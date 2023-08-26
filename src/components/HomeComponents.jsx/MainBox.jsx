@@ -17,22 +17,20 @@ export default function MainBox({ respResult: Values }) {
   //     unit: "CELO",
   //   },
   // ];
+  console.log(Values);
 
   const Result = [
     {
       title: "total",
       amount: "0.64235978213467",
-      unit: "CELO",
     },
     {
       title: "your balance",
       amount: "0.9876580965",
-      unit: "CELO",
     },
     {
       title: "remaining",
       amount: "0.8o67593457",
-      unit: "CELO",
     },
   ];
   return (
@@ -57,7 +55,7 @@ export default function MainBox({ respResult: Values }) {
         }}
       >
         {Values &&
-          Values.map((data) => (
+          Values.map((data, i) => (
             <Box
               sx={{
                 display: "flex",
@@ -67,6 +65,7 @@ export default function MainBox({ respResult: Values }) {
                 mt: 2,
                 fontSize: "22px",
               }}
+              key={i}
             >
               <Box>{data.address}</Box>
               <Box sx={{ flex: "1 0", ml: 2, mr: 2 }}>
@@ -86,8 +85,8 @@ export default function MainBox({ respResult: Values }) {
             </Box>
           ))}
         {Result?.length > 0 &&
-          Result.map((data) => (
-            <Box sx={Cstyle.row}>
+          Result.map((data, i) => (
+            <Box sx={Cstyle.row} key={i}>
               <Box>{data.title}</Box>
               <Box sx={{ flex: "1 0", ml: 2, mr: 2 }}>
                 <Divider />

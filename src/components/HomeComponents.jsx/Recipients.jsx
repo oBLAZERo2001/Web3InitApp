@@ -34,7 +34,6 @@ export default function Recipients({ setRespResult }) {
                 arr.push({
                   address: add,
                   amount: resultSplit.amtArray[i],
-                  unit: "CELO",
                 });
             });
             setRespResult(arr);

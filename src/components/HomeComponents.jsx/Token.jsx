@@ -1,8 +1,12 @@
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { loadToken } from "../../utils/disperse";
+import { useState } from "react";
 
-export default function Token({ token, setToken }) {
+export default function Token({ setTokenResult }) {
+  const [token, setToken] = useState("");
+
   return (
     <Box>
       <Box
@@ -30,7 +34,18 @@ export default function Token({ token, setToken }) {
             setToken(e.target.value);
           }}
         />
-        <Box sx={loadButton}>load</Box>
+        <Box
+          sx={loadButton}
+          onClick={async () => {
+            if (token) {
+              const result = await loadToken(token);
+              console.log(">>>>>>", result);
+              setTokenResult(result);
+            }
+          }}
+        >
+          load
+        </Box>
       </Box>
     </Box>
   );

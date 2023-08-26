@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import React from "react";
 
-export default function Holdings({ holding }) {
+export default function Holdings({ holding, symbol }) {
   return (
     <Box
       sx={{
@@ -9,7 +9,7 @@ export default function Holdings({ holding }) {
         fontSize: "18px",
       }}
     >
-      you have {holding} NEO
+      you have {holding} {symbol}
     </Box>
   );
 }

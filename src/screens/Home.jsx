@@ -10,7 +10,7 @@ import Recipients from "../components/HomeComponents.jsx/Recipients";
 import Token from "../components/HomeComponents.jsx/Token";
 import { disperseNative, disperseToken } from "../utils/disperse";
 import { createDisperse } from "../api/disperse";
-import { getWalletAddress, switchChain } from "../utils/wallet";
+import { getBalance, getWalletAddress, switchChain } from "../utils/wallet";
 import { split } from "../utils/split";
 import DisperseInterface from "../contracts/Disperse.json";
 import ERC20Interface from "../contracts/ERC20.json";
@@ -22,13 +22,25 @@ import { useEffect } from "react";
 
 export const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState("token");
-  const [token, setToken] = useState("");
-  const [holding, setHolding] = useState("76.4697");
+  const [selected, setSelected] = useState("neo");
   // neo| token
   // console.log("neoRecipients :", neoRecipients, "token :", token);
 
   const [respResult, setRespResult] = useState([]);
+  const [tokenResult, setTokenResult] = useState();
+
+  const [holding, setHolding] = useState();
+
+  useEffect(() => {
+    setRespResult([]);
+    const fun = async () => {
+      const result = await getBalance();
+      console.log(result);
+      if (result) setHolding(result);
+    };
+    if (selected === "neo") fun();
+    else setHolding();
+  }, [selected]);
 
   async function disperseNative(addressList) {
     await switchChain();
@@ -100,19 +112,31 @@ export const Home = () => {
         <Header />
         <SubText />
         <Selector selected={selected} setSelected={setSelected} />
+
+        {holding !== null && holding !== undefined && (
+          <Holdings holding={holding} unit={"neo"} symbol={"neo"} />
+        )}
         {/* ! set 1 */}
-        {selected === "neo" && <Recipients setRespResult={setRespResult} />}
-        {/* ! set 2 */}
-
-        {selected === "token" && <Token token={token} setToken={setToken} />}
-
-        {/* ! set 2 */}
-
-        {holding && <Holdings holding={holding} />}
-
-        {selected === "token" && holding && (
+        {selected === "neo" && holding !== null && holding !== undefined && (
           <Recipients setRespResult={setRespResult} />
         )}
+        {/* ! set 2 */}
+        {selected === "token" && <Token setTokenResult={setTokenResult} />}
+        {/* ! set 2 */}
+        {tokenResult?.balance !== null &&
+          tokenResult?.balance !== undefined && (
+            <Holdings
+              holding={tokenResult.balance}
+              symbol={tokenResult.symbol}
+              unit={tokenResult.name}
+            />
+          )}
+
+        {selected === "token" &&
+          tokenResult?.balance !== null &&
+          tokenResult?.balance !== undefined && (
+            <Recipients setRespResult={setRespResult} />
+          )}
         <Box
           onClick={async () => {
             let addList = `0x314ab97b76e39d63c78d5c86c2daf8eaa306b182 0.0141592
@@ -131,9 +155,26 @@ export const Home = () => {
         >
           Disperse
         </Box>
-
         {/* last section */}
-        <MainBox respResult={respResult} />
+        {respResult?.length > 0 && (
+          <MainBox
+            respResult={respResult}
+            symbol={
+              selected === "neo"
+                ? "neo"
+                : tokenResult?.symbol
+                ? tokenResult.symbol
+                : ""
+            }
+            unit={
+              selected === "neo"
+                ? "neo"
+                : tokenResult?.name
+                ? tokenResult.name
+                : ""
+            }
+          />
+        )}
       </Box>
     </Box>
   );
