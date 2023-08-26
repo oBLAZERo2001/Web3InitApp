@@ -7,7 +7,9 @@ export default function Trasfer({ onClick, status, id }) {
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Disperse onClick={onClick} />
         <Box sx={{ ml: 4, mt: 3 }}>
-          <Box sx={{ color: "gray" }}>transaction pending</Box>
+          <Box sx={{ color: status === "success" ? "#15d100" : "gray" }}>
+            transaction {status}
+          </Box>
           <Box sx={{ mt: 0.5 }}>
             <u>{id}</u>
           </Box>

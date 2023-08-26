@@ -13,6 +13,7 @@ export default function SubText() {
       sx={{
         mt: 4,
         p: 2,
+        pl: 0,
       }}
     >
       verb distribute ether or tokens to multiple addresses

@@ -112,8 +112,9 @@ export default function MainBox() {
           ))}
         <Trasfer
           onClick={() => {}}
-          // complted| pendeing
-          status="pendeing"
+          // success| pendeing
+          //   status="pendeing"
+          status="success"
           id={"0x64a871919cff66af7d77aeb89ce367a31af61604"}
         />
       </Box>
