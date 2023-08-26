@@ -37,7 +37,6 @@ export default function Recipients({ setRespResult }) {
                 });
             });
             setRespResult(arr);
-            console.log(arr);
           }
         }}
         fullWidth

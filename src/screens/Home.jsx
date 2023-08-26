@@ -13,12 +13,11 @@ import { createDisperse } from "../api/disperse";
 import { getBalance, getWalletAddress, switchChain } from "../utils/wallet";
 import { split } from "../utils/split";
 import DisperseInterface from "../contracts/Disperse.json";
-import ERC20Interface from "../contracts/ERC20.json";
 import Web3 from "web3";
 import { CONTRACT_ADDRESS } from "../constants";
 import MainBox from "../components/HomeComponents.jsx/MainBox";
-import Holdings from "../components/HomeComponents.jsx/Holdings";
 import { useEffect } from "react";
+import Holdings from "../components/HomeComponents.jsx/Holdings";
 
 export const Home = () => {
   const [loading, setLoading] = useState(false);

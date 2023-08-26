@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
 import React from "react";
+import Web3 from "web3";
 
 export default function Holdings({ holding, symbol }) {
   return (
@@ -9,7 +10,7 @@ export default function Holdings({ holding, symbol }) {
         fontSize: "18px",
       }}
     >
-      you have {holding} {symbol}
+      you have {Web3.utils.fromWei(holding)} {symbol}
     </Box>
   );
 }
