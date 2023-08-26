@@ -52,14 +52,6 @@ export default function Selector({ selected, setSelected, holding }) {
           token
         </Box>
       </Box>
-      <Box
-        sx={{
-          mt: 2,
-          fontSize: "18px",
-        }}
-      >
-        you have {holding} NEO
-      </Box>
     </Box>
   );
 }

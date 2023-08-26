@@ -2,20 +2,21 @@ import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import Trasfer from "./Trasfer";
+import Web3 from "web3";
 
-export default function MainBox() {
-  const Values = [
-    {
-      address: "0x64a871919cff66af7d77aeb89ce367a31af61604",
-      amount: "0.0001",
-      unit: "CELO",
-    },
-    {
-      address: "0x64a871919cff66af7d77aeb89ce367a31af61604",
-      amount: "0.0001",
-      unit: "CELO",
-    },
-  ];
+export default function MainBox({ respResult: Values }) {
+  // const Values = [
+  //   {
+  //     address: "0x64a871919cff66af7d77aeb89ce367a31af61604",
+  //     amount: "0.0001",
+  //     unit: "CELO",
+  //   },
+  //   {
+  //     address: "0x64a871919cff66af7d77aeb89ce367a31af61604",
+  //     amount: "0.0001",
+  //     unit: "CELO",
+  //   },
+  // ];
 
   const Result = [
     {
@@ -55,7 +56,7 @@ export default function MainBox() {
           width: "80vw",
         }}
       >
-        {Values?.length > 0 &&
+        {Values &&
           Values.map((data) => (
             <Box
               sx={{
@@ -96,6 +97,7 @@ export default function MainBox() {
                   whiteSpace: "nowrap",
                 }}
               >
+                {/* {Web3?.utils?.fromWei(data.amount)} */}
                 {data.amount}
                 <span
                   style={{

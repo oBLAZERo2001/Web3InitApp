@@ -1,8 +1,11 @@
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { split } from "../../utils/split";
+import { useState } from "react";
 
-export default function Recipients({ neoRecipients, setNeoRecipients }) {
+export default function Recipients({ setRespResult }) {
+  const [neoRecipients, setNeoRecipients] = useState("");
   return (
     <Box sx={{}}>
       <Box sx={{ mt: 2, fontSize: "24px", fontWeight: "500" }}>
@@ -20,6 +23,23 @@ export default function Recipients({ neoRecipients, setNeoRecipients }) {
         value={neoRecipients}
         onChange={(e) => {
           setNeoRecipients(e.target.value);
+          const resultSplit = split(e.target.value);
+          if (
+            resultSplit?.addArray?.length > 0 &&
+            resultSplit?.amtArray?.length > 0
+          ) {
+            let arr = [];
+            resultSplit.addArray.forEach((add, i) => {
+              if (add && resultSplit.amtArray[i])
+                arr.push({
+                  address: add,
+                  amount: resultSplit.amtArray[i],
+                  unit: "CELO",
+                });
+            });
+            setRespResult(arr);
+            console.log(arr);
+          }
         }}
         fullWidth
       />
