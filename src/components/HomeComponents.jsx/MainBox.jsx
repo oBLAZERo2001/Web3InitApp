@@ -17,7 +17,7 @@ export default function MainBox({ respResult: Values }) {
   //     unit: "CELO",
   //   },
   // ];
-  console.log(Values);
+  console.log(Web3.utils.fromWei("1000000000000"))
 
   const Result = [
     {
@@ -77,7 +77,9 @@ export default function MainBox({ respResult: Values }) {
                   whiteSpace: "nowrap",
                 }}
               >
-                {data.amount}
+                {/* {data.amount} */}
+                {Web3.utils.fromWei(data.amount)}
+
                 <span style={{ marginLeft: "5px", fontSize: "18px" }}>
                   {data.unit}
                 </span>
