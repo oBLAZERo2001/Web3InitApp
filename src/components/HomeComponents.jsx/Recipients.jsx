@@ -4,8 +4,11 @@ import React from "react";
 import { split } from "../../utils/split";
 import { useState } from "react";
 
-export default function Recipients({ setRespResult }) {
-  const [neoRecipients, setNeoRecipients] = useState("");
+export default function Recipients({
+  neoRecipients,
+  setNeoRecipients,
+  setRespResult,
+}) {
   return (
     <Box sx={{}}>
       <Box sx={{ mt: 2, fontSize: "24px", fontWeight: "500" }}>

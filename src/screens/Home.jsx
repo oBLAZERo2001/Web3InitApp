@@ -28,10 +28,15 @@ export const Home = () => {
   const [respResult, setRespResult] = useState([]);
   const [tokenResult, setTokenResult] = useState();
 
+  const [neoRecipients, setNeoRecipients] = useState("");
+  const [token, setToken] = useState("");
+
   const [holding, setHolding] = useState();
 
   useEffect(() => {
     setRespResult([]);
+    setNeoRecipients("");
+    setToken("");
     const fun = async () => {
       const result = await getBalance();
       console.log(result);
@@ -117,10 +122,20 @@ export const Home = () => {
         )}
         {/* ! set 1 */}
         {selected === "neo" && holding !== null && holding !== undefined && (
-          <Recipients setRespResult={setRespResult} />
+          <Recipients
+            neoRecipients={neoRecipients}
+            setNeoRecipients={setNeoRecipients}
+            setRespResult={setRespResult}
+          />
         )}
         {/* ! set 2 */}
-        {selected === "token" && <Token setTokenResult={setTokenResult} />}
+        {selected === "token" && (
+          <Token
+            setTokenResult={setTokenResult}
+            token={token}
+            setToken={setToken}
+          />
+        )}
         {/* ! set 2 */}
         {selected === "token" &&
           tokenResult?.balance !== null &&
@@ -135,7 +150,11 @@ export const Home = () => {
         {selected === "token" &&
           tokenResult?.balance !== null &&
           tokenResult?.balance !== undefined && (
-            <Recipients setRespResult={setRespResult} />
+            <Recipients
+              neoRecipients={neoRecipients}
+              setNeoRecipients={setNeoRecipients}
+              setRespResult={setRespResult}
+            />
           )}
         <Box
           onClick={async () => {
@@ -158,6 +177,8 @@ export const Home = () => {
         {/* last section */}
         {respResult?.length > 0 && (
           <MainBox
+            token={token}
+            neoRecipients={neoRecipients}
             respResult={respResult}
             symbol={
               selected === "neo"

@@ -4,7 +4,7 @@ import React from "react";
 import Trasfer from "./Trasfer";
 import Web3 from "web3";
 
-export default function MainBox({ respResult: Values }) {
+export default function MainBox({ respResult: Values, neoRecipients, token }) {
   // const Values = [
   //   {
   //     address: "0x64a871919cff66af7d77aeb89ce367a31af61604",
@@ -17,7 +17,7 @@ export default function MainBox({ respResult: Values }) {
   //     unit: "CELO",
   //   },
   // ];
-  console.log(Web3.utils.fromWei("1000000000000"))
+  console.log(Web3.utils.fromWei("1000000000000"));
 
   const Result = [
     {
@@ -114,7 +114,9 @@ export default function MainBox({ respResult: Values }) {
             </Box>
           ))}
         <Trasfer
-          onClick={() => {}}
+          onClick={() => {
+            console.log(neoRecipients, token);
+          }}
           // success| pendeing
           //   status="pendeing"
           status="success"

@@ -4,9 +4,7 @@ import React from "react";
 import { loadToken } from "../../utils/disperse";
 import { useState } from "react";
 
-export default function Token({ setTokenResult }) {
-  const [token, setToken] = useState("");
-
+export default function Token({ setTokenResult, token, setToken }) {
   return (
     <Box>
       <Box
@@ -38,8 +36,9 @@ export default function Token({ setTokenResult }) {
           sx={loadButton}
           onClick={async () => {
             if (token) {
+              console.log(">>>>>>", token);
+
               const result = await loadToken(token);
-              console.log(">>>>>>", result);
               setTokenResult(result);
             }
           }}
