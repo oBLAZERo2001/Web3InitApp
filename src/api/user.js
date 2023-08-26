@@ -17,8 +17,7 @@ export const createUser = async function (address) {
 				},
 			}
 		);
-		if (response.status === 200) {
-			console.log(response.data);
+		if (response.status === 201) {
 			localStorage.setItem("token", response.data.token);
 
 			return response.data;
