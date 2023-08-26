@@ -10,9 +10,17 @@ export default function Header() {
           heigth: "50px",
         }}
       >
-        <img src="/logo.svg.png" alt="" srcset="" width="100%" heigth="100%" />
+        <img src="/logo.svg.png" alt="" width="100%" heigth="100%" />
       </Box>
       <Box sx={{ ml: 2, fontSize: "25px" }}>Neo Disperse</Box>
+      {/* <TextField
+        multiline
+        minrow={3}
+        //   value={name}
+        onChange={(e) => {
+          console.log({ A: e.target.value });
+        }}
+      /> */}
     </Box>
   );
 }
