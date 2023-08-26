@@ -22,7 +22,7 @@ import { useEffect } from "react";
 
 export const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState("neo");
+  const [selected, setSelected] = useState("");
   // neo| token
   // console.log("neoRecipients :", neoRecipients, "token :", token);
 
@@ -113,7 +113,7 @@ export const Home = () => {
         <SubText />
         <Selector selected={selected} setSelected={setSelected} />
 
-        {holding !== null && holding !== undefined && (
+        {selected === "neo" && holding !== null && holding !== undefined && (
           <Holdings holding={holding} unit={"neo"} symbol={"neo"} />
         )}
         {/* ! set 1 */}
@@ -123,7 +123,8 @@ export const Home = () => {
         {/* ! set 2 */}
         {selected === "token" && <Token setTokenResult={setTokenResult} />}
         {/* ! set 2 */}
-        {tokenResult?.balance !== null &&
+        {selected === "token" &&
+          tokenResult?.balance !== null &&
           tokenResult?.balance !== undefined && (
             <Holdings
               holding={tokenResult.balance}
