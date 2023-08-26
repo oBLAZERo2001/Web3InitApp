@@ -8,7 +8,7 @@ export default function Trasfer({ onClick, status, id }) {
         <Disperse onClick={onClick} />
         <Box sx={{ ml: 4, mt: 3 }}>
           <Box sx={{ color: status === "success" ? "#15d100" : "gray" }}>
-            transaction {status}
+            {status}
           </Box>
           <Box sx={{ mt: 0.5 }}>
             <u>{id}</u>
@@ -47,7 +47,7 @@ const Disperse = ({ onClick }) => {
       }}
       onClick={onClick}
     >
-      Disperse ether
+      Disperse token
     </Box>
   );
 };
