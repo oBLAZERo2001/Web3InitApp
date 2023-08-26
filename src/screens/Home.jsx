@@ -4,10 +4,8 @@ import React from "react";
 import { Box } from "@mui/system";
 import Header from "../components/HomeComponents.jsx/Header";
 import SubText from "../components/HomeComponents.jsx/SubText";
-import MainBox from "../components/HomeComponents.jsx/MainBox";
 import Selector from "../components/HomeComponents.jsx/Selector";
 import { useState } from "react";
-import { useEffect } from "react";
 import Recipients from "../components/HomeComponents.jsx/Recipients";
 import Token from "../components/HomeComponents.jsx/Token";
 
@@ -17,7 +15,6 @@ export const Home = () => {
   const [token, setToken] = useState("");
   // neo| token
   console.log("neoRecipients :", neoRecipients, "token :", token);
-
   const holding = "76.4697";
 
   return (
