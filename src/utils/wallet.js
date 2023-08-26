@@ -25,8 +25,8 @@ export async function connectWalletToSite() {
 }
 
 export async function switchChain() {
-	const config = { ...ChainsConfig["SHARDEUM_BETA"] };
-	config.chainId = Web3.utils.toHex(ChainsConfig["SHARDEUM_BETA"].chainId);
+	const config = { ...ChainsConfig["NEO_EVM"] };
+	config.chainId = Web3.utils.toHex(ChainsConfig["NEO_EVM"].chainId);
 
 	try {
 		await window.ethereum.request({
