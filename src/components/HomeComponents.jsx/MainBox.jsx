@@ -8,8 +8,8 @@ import { createDisperse } from "../../api/disperse";
 
 import { split } from "../../utils/split";
 import DisperseInterface from "../../contracts/Disperse.json";
+import ERC20Interface from "../../contracts/ERC20.json";
 import { CONTRACT_ADDRESS } from "../../constants";
-import { disperseToken } from "../../utils/disperse";
 
 export default function MainBox({ respResult: Values, neoRecipients, token }) {
 	const [loading, setLoading] = useState(false);
@@ -63,16 +63,78 @@ export default function MainBox({ respResult: Values, neoRecipients, token }) {
 				setTrx_id(hash);
 			})
 			.on("receipt", async function (receipt) {
-				// Get token address
-				// toast("Dispersed", { type: "success" });
 				createDisperse(addressList, token);
 				setState("success");
 				setLoading(false);
-				// await new Promise((res, rej) => {
-				// 	setTimeout(() => {
-				// 		window.location.reload();
-				// 	}, 3000);
-				// });
+			});
+	}
+
+	async function disperseToken(tokenAddress, addressList) {
+		await switchChain();
+		const web3 = new Web3(window.ethereum);
+
+		let { addArray, amtArray } = split(addressList);
+
+		const contract = new web3.eth.Contract(
+			DisperseInterface.abi,
+			CONTRACT_ADDRESS
+		);
+		const currentAddress = await getWalletAddress();
+
+		// Gas Calculation
+		console.log(addArray, amtArray);
+		const gasPrice = await web3.eth.getGasPrice();
+		const gas = await contract.methods
+			.disperseToken(tokenAddress, addArray, amtArray) // change 2 to price taken from field
+			.estimateGas({
+				from: currentAddress,
+			});
+
+		return contract.methods
+			.disperseToken(tokenAddress, addArray, amtArray) // change 2 to price taken from field
+			.send({
+				from: currentAddress,
+				gasPrice,
+				gas,
+			})
+			.on("transactionHash", function (hash) {
+				setLoading(true);
+				setState("pending");
+				setTrx_id(hash);
+			})
+			.on("receipt", async function (receipt) {
+				createDisperse(addressList, token);
+				setState("success");
+				setLoading(false);
+			});
+	}
+
+	async function allowToken(tokenAddress, addressList) {
+		await switchChain();
+		const web3 = new Web3(window.ethereum);
+		const { total } = split(addressList);
+
+		const contract = new web3.eth.Contract(ERC20Interface.abi, tokenAddress);
+		const currentAddress = await getWalletAddress();
+
+		// Gas Calculation
+		const gasPrice = await web3.eth.getGasPrice();
+		const gas = await contract.methods
+			.approve(CONTRACT_ADDRESS, Web3.utils.toWei(total.toString())) // change 2 to price taken from field
+			.estimateGas({
+				from: currentAddress,
+			});
+
+		await contract.methods
+			.approve(CONTRACT_ADDRESS, Web3.utils.toWei(total.toString())) // change 2 to price taken from field
+			.send({
+				from: currentAddress,
+				gasPrice,
+				gas,
+			})
+			.on("transactionHash", function (hash) {})
+			.on("receipt", async function (receipt) {
+				await disperseToken(token, neoRecipients);
 			});
 	}
 
@@ -172,10 +234,10 @@ export default function MainBox({ respResult: Values, neoRecipients, token }) {
 					))}
 				<Trasfer
 					onClick={() => {
+						console.log(token);
 						!token || token === ""
 							? disperseNative(neoRecipients)
-							: disperseToken(token, neoRecipients);
-						console.log(token);
+							: allowToken(token, neoRecipients);
 					}}
 					// success| pendeing
 					//   status="pendeing"
