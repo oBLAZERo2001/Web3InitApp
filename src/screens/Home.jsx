@@ -101,14 +101,14 @@ export const Home = () => {
 							setRespResult={setRespResult}
 						/>
 					)}
-				<Box
+				{/* <Box
 					onClick={async () => {}}
 					sx={{
 						cursor: "pointer",
 					}}
 				>
 					Disperse
-				</Box>
+				</Box> */}
 				{/* last section */}
 				{respResult?.length > 0 && (
 					<MainBox
